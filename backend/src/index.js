@@ -1,8 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const { uuid, isUuid } = require('uuidv4');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 const projects = [];
@@ -37,7 +39,7 @@ app.get('/projects', (request, response) => {
 
     const results = title
         ? projects.filter(project => project.title.includes(title))
-        : project;
+        : projects;
 
     return response.json(results);
 });
