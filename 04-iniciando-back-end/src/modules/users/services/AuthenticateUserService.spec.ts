@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../providers/HashProvider/fakes/fakeHashProvider';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
@@ -10,10 +10,13 @@ describe('AuthenticateUser', () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
 
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
     const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
-      fakeHashProvider
+      fakeHashProvider,
     );
 
     const user = await createUser.execute({
@@ -37,14 +40,14 @@ describe('AuthenticateUser', () => {
 
     const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
-      fakeHashProvider
+      fakeHashProvider,
     );
 
     await expect(
       authenticateUser.execute({
-      email: 'johndoe@example.com',
-      password: '123456',
-    }),
+        email: 'johndoe@example.com',
+        password: '123456',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
@@ -52,10 +55,13 @@ describe('AuthenticateUser', () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
 
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
     const authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
-      fakeHashProvider
+      fakeHashProvider,
     );
 
     await createUser.execute({
@@ -66,9 +72,9 @@ describe('AuthenticateUser', () => {
 
     await expect(
       authenticateUser.execute({
-      email: 'johndoe@example.com',
-      password: 'wrong-password',
-    }),
+        email: 'johndoe@example.com',
+        password: 'wrong-password',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 
-import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
 describe('UpdateUser', () => {
@@ -18,7 +18,7 @@ describe('UpdateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-    })
+    });
 
     await updateUserAvatar.execute({
       user_id: user.id,
@@ -39,9 +39,9 @@ describe('UpdateUser', () => {
 
     await expect(
       updateUserAvatar.execute({
-      user_id: 'non-existing-user',
-      avatarFilename: 'avatar.jpg',
-      })
+        user_id: 'non-existing-user',
+        avatarFilename: 'avatar.jpg',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
@@ -60,7 +60,7 @@ describe('UpdateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
-    })
+    });
 
     await updateUserAvatar.execute({
       user_id: user.id,

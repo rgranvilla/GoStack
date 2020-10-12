@@ -1,10 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
+import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-
-import User from '@modules/users/infra/typeorm/entities/User.ts';
 
 interface IRequest {
   name: string;
@@ -22,7 +21,7 @@ class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<Omit<User, 'password'>> {
+  public async execute({ name, email, password }: IRequest): Promise<User> {
     const checkUsersExists = await this.usersRepository.findByEmail(email);
 
     if (checkUsersExists) {

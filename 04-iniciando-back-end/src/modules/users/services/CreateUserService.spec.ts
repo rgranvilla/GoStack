@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeHashProvider from '../providers/HashProvider/fakes/fakeHashProvider';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from './CreateUserService';
 
 describe('CreateUser', () => {
@@ -9,7 +9,10 @@ describe('CreateUser', () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
 
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
 
     const user = await createUser.execute({
       name: 'John Doe',
@@ -24,7 +27,10 @@ describe('CreateUser', () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
 
-    const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+    const createUser = new CreateUserService(
+      fakeUsersRepository,
+      fakeHashProvider,
+    );
 
     await createUser.execute({
       name: 'John Doe',
@@ -32,11 +38,12 @@ describe('CreateUser', () => {
       password: '123456',
     });
 
-    await expect(createUser.execute({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: '123456',
-    }),
+    await expect(
+      createUser.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123456',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });
