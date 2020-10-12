@@ -6,8 +6,6 @@ import IMailProvider from '@shared/container/providers/MailProvider/models/IMail
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
-// import User from '@modules/users/infra/typeorm/entities/User.ts';
-
 interface IRequest {
   email: string;
 }
