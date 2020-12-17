@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
         "plugin:@typescript-eslint/recommended",
@@ -32,13 +33,13 @@
       "prettier/prettier": "error",
       "react/jsx-one-expression-per-line": "off",
       "no-use-before-define":"off",
+      "no-unused-expressions": "off",
+      "camelcase": "off",
       "react/jsx-props-no-spreading": "off",
       "react/prop-types": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "no-unused-expressions": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
-      "import/prefer-default-export": "off",
       "@typescript-eslint/ban-types": "off",
       "@typescript-eslint/explicit-function-return-type":[
         "error",
@@ -46,6 +47,8 @@
           "allowExpressions": true
         }
       ],
+      "import/no-duplicates": "off",
+      "import/prefer-default-export": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
